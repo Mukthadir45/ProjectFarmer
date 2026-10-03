@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; margin: 0; padding: 30px; color: #333; }
+        .container { max-width: 1200px; margin: auto; }
+        
+        /* Navigation & Header */
+        nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        nav a { text-decoration: none; color: #2980b9; font-weight: 600; padding: 8px 16px; background: #e1ecf4; border-radius: 6px; transition: 0.2s; }
+        nav a:hover { background: #d0e3f0; }
+        h1 { color: #1c2833; font-size: 28px; margin-bottom: 25px; }
+
+        /* Grid Layout */
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 25px; }
+        
+        /* Cards */
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .card h2 { margin-top: 0; color: #2c3e50; font-size: 20px; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px; margin-bottom: 20px; }
+        
+        /* Form Styling */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; color: #555; }
+        .form-group input, .form-group select { width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px; transition: 0.3s; }
+        .form-group input:focus, .form-group select:focus { border-color: #2980b9; outline: none; box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.1); }
+        .btn-submit { background-color: #27ae60; color: white; padding: 12px; border: none; border-radius: 6px; width: 100%; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.2s; margin-top: 10px; }
+        .btn-submit:hover { background-color: #219150; }
+
+        /* List Items */
+        .list-container { display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; }
+        .item { border: 1px solid #eee; padding: 15px; border-radius: 8px; background: #fafafa; }
+        .item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .item-title { font-size: 16px; font-weight: bold; color: #2980b9; }
+        .status { font-size: 12px; font-weight: bold; padding: 4px 8px; border-radius: 20px; background: #e8f8f5; color: #27ae60; }
+        .status.rented { background: #fdedec; color: #c0392b; }
+        .item-details { font-size: 14px; color: #666; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="/">← Back to Live Map</a>
+            <span>Logged in as <b>{{ request.user.username }}</b></span>
+        </nav>
+        
+        <h1>My Farming Dashboard</h1>
+
+        <div class="dashboard-grid">
+            <!-- Left Column: Add New Equipment Form -->
+            <div class="card">
+                <h2>List New Equipment</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Equipment Name</label>
+                        <input type="text" name="name" placeholder="e.g., Mahindra 575 DI" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select name="category" required>
+                            <option value="Tractor">Tractor</option>
+                            <option value="Harvester">Harvester</option>
+                            <option value="Sprayer">Sprayer</option>
+                            <option value="Rotavator">Rotavator</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Price per Day (₹)</label>
+                        <input type="number" name="price" placeholder="1500" required>
+                    </div>
+                    <!-- Pre-filled with coordinates near Nandyal for testing -->
+                    <div class="form-group">
+                        <label>Latitude (Location)</label>
+                        <input type="number" step="any" name="latitude" value="15.48" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Longitude (Location)</label>
+                        <input type="number" step="any" name="longitude" value="78.48" required>
+                    </div>
+                    <button type="submit" class="btn-submit">+ List Equipment</button>
+                </form>
+            </div>
+
+            <!-- Right Column: Lists -->
+            <div>
+                <!-- Owned Equipment List -->
+                <div class="card" style="margin-bottom: 25px;">
+                    <h2>My Listed Equipment</h2>
+                    <div class="list-container">
+                        {% for eq in my_equipment %}
+                            <div class="item">
+                                <div class="item-header">
+                                    <span class="item-title">{{ eq.name }} ({{ eq.category }})</span>
+                                    {% if eq.is_available %}
+                                        <span class="status">Available</span>
+                                    {% else %}
+                                        <span class="status rented">Rented Out</span>
+                                    {% endif %}
+                                </div>
+                                <div class="item-details">
+                                    Rate: ₹{{ eq.price_per_day }} / day <br>
+                                    Location Pin: {{ eq.latitude|floatformat:4 }}, {{ eq.longitude|floatformat:4 }}
+                                </div>
+                            </div>
+                        {% empty %}
+                            <p style="color: #7f8c8d; font-size: 14px;">You haven't listed any equipment yet. Use the form to get started.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Bookings List -->
+                <div class="card">
+                    <h2>My Active Rentals</h2>
+                    <div class="list-container">
+                        {% for booking in my_bookings %}
+                            <div class="item">
+                                <div class="item-header">
+                                    <span class="item-title">{{ booking.equipment.name }}</span>
+                                    <span class="status">{{ booking.status }}</span>
+                                </div>
+                                <div class="item-details">
+                                    Rental Period: {{ booking.start_date }} to {{ booking.end_date }} <br>
+                                    Total Cost: <b>₹{{ booking.total_price }}</b>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <p style="color: #7f8c8d; font-size: 14px;">You are not currently renting any equipment.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

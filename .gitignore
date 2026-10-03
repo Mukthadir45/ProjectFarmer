@@ -1,0 +1,10 @@
+# Environments
+venv/
+farmer_env/
+
+# Database
+db.sqlite3
+
+# Python cache
+__pycache__/
+*.pyc

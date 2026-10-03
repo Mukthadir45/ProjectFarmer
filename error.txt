@@ -1,0 +1,73 @@
+Internal Server Error: /rent/70/
+Traceback (most recent call last):
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\core\handlers\exception.py", line 56, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\core\handlers\base.py", line 199, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\contrib\auth\decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\core\views.py", line 61, in rent_equipment
+    Booking.objects.create(
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\db\models\query.py", line 750, in create
+    obj = self.model(**kwargs)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\db\models\base.py", line 610, in __init__
+    raise TypeError(
+TypeError: Booking() got unexpected keyword arguments: 'total_price'
+[03/Oct/2026 12:44:09] "POST /rent/70/ HTTP/1.1" 500 92467
+Internal Server Error: /rent/70/
+Traceback (most recent call last):
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\core\handlers\exception.py", line 56, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\core\handlers\base.py", line 199, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\contrib\auth\decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\core\views.py", line 61, in rent_equipment
+    Booking.objects.create(
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\db\models\query.py", line 750, in create
+    obj = self.model(**kwargs)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\db\models\base.py", line 610, in __init__
+    raise TypeError(
+TypeError: Booking() got unexpected keyword arguments: 'total_price'
+[03/Oct/2026 12:44:13] "POST /rent/70/ HTTP/1.1" 500 92595
+Not Found: /favicon.ico
+[03/Oct/2026 12:44:13] "GET /favicon.ico HTTP/1.1" 404 3075
+[03/Oct/2026 12:44:17] "GET / HTTP/1.1" 200 11538
+[03/Oct/2026 12:44:20] "GET /rent/92/ HTTP/1.1" 200 1832
+Internal Server Error: /rent/92/
+Traceback (most recent call last):
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\core\handlers\exception.py", line 56, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\core\handlers\base.py", line 199, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\contrib\auth\decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\core\views.py", line 61, in rent_equipment
+    Booking.objects.create(
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\db\models\query.py", line 750, in create
+    obj = self.model(**kwargs)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\OneDrive\Documents\FarmersBnB\farmer_env\Lib\site-packages\django\db\models\base.py", line 610, in __init__
+    raise TypeError(
+TypeError: Booking() got unexpected keyword arguments: 'total_price'
+[03/Oct/2026 12:44:26] "POST /rent/92/ HTTP/1.1" 500 92474
